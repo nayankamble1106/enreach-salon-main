@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getAssetUrl } from '../utils';
 
 interface HeaderProps {
   onBookClick: () => void;
@@ -28,11 +29,11 @@ export const Header: React.FC<HeaderProps> = ({
           >
             {/* Top Header Logo */}
             <img
-              src="./logo.png"
+              src={getAssetUrl('logo.png')}
               onError={(e) => {
                 const target = e.currentTarget;
-                if (!target.src.endsWith('/logo.png')) {
-                  target.src = '/logo.png';
+                if (!target.src.includes('logo.png')) {
+                  target.src = './logo.png';
                 }
               }}
               alt="Enreach Unisex Salon"
@@ -88,11 +89,11 @@ export const Header: React.FC<HeaderProps> = ({
               <div className="flex items-center justify-between pb-5 border-b border-white/10 mb-6">
                 <div className="flex items-center gap-2.5">
                   <img
-                    src="./logo.png"
+                    src={getAssetUrl('logo.png')}
                     onError={(e) => {
                       const target = e.currentTarget;
-                      if (!target.src.endsWith('/logo.png')) {
-                        target.src = '/logo.png';
+                      if (!target.src.includes('logo.png')) {
+                        target.src = './logo.png';
                       }
                     }}
                     alt="Enreach Unisex Salon"

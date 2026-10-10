@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { getAssetUrl } from '../utils';
 
 interface LightboxModalProps {
   currentIndex: number | null;
@@ -31,17 +32,27 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
 }) => {
   const [zoomLevel, setZoomLevel] = useState<number>(1);
   const currentSlotNumber = currentIndex !== null ? currentIndex + 1 : 1;
-  const directPath = `./image${currentSlotNumber}.jpg.jpeg`;
-  const initialSrc = currentIndex !== null ? (images[currentIndex] || directPath) : directPath;
-  const [activeSrc, setActiveSrc] = useState<string>(initialSrc);
 
-  // Reset zoom and image src when card changes
+  const candidatePaths = useMemo(() => {
+    const rawPassed = currentIndex !== null ? images[currentIndex] : '';
+    return [
+      rawPassed ? (rawPassed.startsWith('http') || rawPassed.startsWith('data:') ? rawPassed : getAssetUrl(rawPassed)) : '',
+      getAssetUrl(`image${currentSlotNumber}.jpg.jpeg`),
+      `./image${currentSlotNumber}.jpg.jpeg`,
+      getAssetUrl(`image${currentSlotNumber}.jpg`),
+      `./image${currentSlotNumber}.jpg`,
+    ].filter(Boolean) as string[];
+  }, [currentIndex, currentSlotNumber, images]);
+
+  const [candidateIndex, setCandidateIndex] = useState<number>(0);
+
+  // Reset zoom and candidate index when card changes
   useEffect(() => {
     setZoomLevel(1);
-    if (currentIndex !== null) {
-      setActiveSrc(images[currentIndex] || `./image${currentSlotNumber}.jpg.jpeg`);
-    }
-  }, [currentIndex, currentSlotNumber, images]);
+    setCandidateIndex(0);
+  }, [currentIndex, currentSlotNumber]);
+
+  const activeSrc = candidatePaths[candidateIndex] || getAssetUrl(`image${currentSlotNumber}.jpg.jpeg`);
 
   const handlePrev = useCallback(() => {
     if (currentIndex === null) return;
@@ -89,12 +100,8 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
   };
 
   const handleImageError = () => {
-    if (activeSrc === `./image${currentSlotNumber}.jpg.jpeg`) {
-      setActiveSrc(`/image${currentSlotNumber}.jpg.jpeg`);
-    } else if (activeSrc === `/image${currentSlotNumber}.jpg.jpeg`) {
-      setActiveSrc(`./image${currentSlotNumber}.jpg`);
-    } else if (activeSrc === `./image${currentSlotNumber}.jpg`) {
-      setActiveSrc(`/image${currentSlotNumber}.jpg`);
+    if (candidateIndex < candidatePaths.length - 1) {
+      setCandidateIndex((prev) => prev + 1);
     }
   };
 
@@ -235,7 +242,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
         <div className="flex items-center justify-center gap-2 min-w-max mx-auto">
           {Array.from({ length: TOTAL_CARDS }).map((_, i) => {
             const cardNum = i + 1;
-            const thumbSrc = images[i] || `./image${cardNum}.jpg.jpeg`;
+            const thumbSrc = images[i] ? getAssetUrl(images[i]) : getAssetUrl(`image${cardNum}.jpg.jpeg`);
             const isSelected = i === currentIndex;
 
             return (

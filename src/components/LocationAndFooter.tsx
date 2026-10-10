@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl } from '../utils';
 
 export const LocationAndFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -80,11 +81,11 @@ export const LocationAndFooter: React.FC = () => {
           <div className="flex flex-col items-center mb-1">
             {/* Footer Logo */}
             <img
-              src="./logo.png"
+              src={getAssetUrl('logo.png')}
               onError={(e) => {
                 const target = e.currentTarget;
-                if (!target.src.endsWith('/logo.png')) {
-                  target.src = '/logo.png';
+                if (!target.src.includes('logo.png')) {
+                  target.src = './logo.png';
                 }
               }}
               alt="Enreach Unisex Salon"

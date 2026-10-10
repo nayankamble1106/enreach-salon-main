@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImageSlot } from './ImageSlot';
+import { getAssetUrl } from '../utils';
 
 interface MenuGalleryProps {
   isOpen: boolean;
@@ -8,14 +9,14 @@ interface MenuGalleryProps {
 }
 
 const GALLERY_SLOTS = [
-  { slotNumber: 2, slotIndex: 1, title: 'Hair Cutting & Precision Styling', defaultSrc: './image2.jpg.jpeg' },
-  { slotNumber: 3, slotIndex: 2, title: 'Luxury Hair Spa & Detox Therapy', defaultSrc: './image3.jpg.jpeg' },
-  { slotNumber: 4, slotIndex: 3, title: 'Hair Color, Highlights & Balayage', defaultSrc: './image4.jpg.jpeg' },
-  { slotNumber: 5, slotIndex: 4, title: 'Skin Rituals & Hydra Facials', defaultSrc: './image5.jpg.jpeg' },
-  { slotNumber: 6, slotIndex: 5, title: 'Beard Sculpting & Men\'s Spa', defaultSrc: './image6.jpg.jpeg' },
-  { slotNumber: 7, slotIndex: 6, title: 'Hands & Feet Care / Nails', defaultSrc: './image7.jpg.jpeg' },
-  { slotNumber: 8, slotIndex: 7, title: 'Detan, Waxing & Body Glow', defaultSrc: './image8.jpg.jpeg' },
-  { slotNumber: 9, slotIndex: 8, title: 'Bridal & Occasion Packages', defaultSrc: './image9.jpg.jpeg' },
+  { slotNumber: 2, slotIndex: 1, title: 'Hair Cutting & Precision Styling', defaultSrc: getAssetUrl('image2.jpg.jpeg') },
+  { slotNumber: 3, slotIndex: 2, title: 'Luxury Hair Spa & Detox Therapy', defaultSrc: getAssetUrl('image3.jpg.jpeg') },
+  { slotNumber: 4, slotIndex: 3, title: 'Hair Color, Highlights & Balayage', defaultSrc: getAssetUrl('image4.jpg.jpeg') },
+  { slotNumber: 5, slotIndex: 4, title: 'Skin Rituals & Hydra Facials', defaultSrc: getAssetUrl('image5.jpg.jpeg') },
+  { slotNumber: 6, slotIndex: 5, title: 'Beard Sculpting & Men\'s Spa', defaultSrc: getAssetUrl('image6.jpg.jpeg') },
+  { slotNumber: 7, slotIndex: 6, title: 'Hands & Feet Care / Nails', defaultSrc: getAssetUrl('image7.jpg.jpeg') },
+  { slotNumber: 8, slotIndex: 7, title: 'Detan, Waxing & Body Glow', defaultSrc: getAssetUrl('image8.jpg.jpeg') },
+  { slotNumber: 9, slotIndex: 8, title: 'Bridal & Occasion Packages', defaultSrc: getAssetUrl('image9.jpg.jpeg') },
 ];
 
 export const MenuGallery: React.FC<MenuGalleryProps> = ({

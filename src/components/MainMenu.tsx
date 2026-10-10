@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImageSlot } from './ImageSlot';
+import { getAssetUrl } from '../utils';
 
 interface MainMenuProps {
   imageSrc?: string;
@@ -7,10 +8,10 @@ interface MainMenuProps {
 }
 
 export const MainMenu: React.FC<MainMenuProps> = ({
-  imageSrc = './image1.jpg.jpeg',
+  imageSrc,
   onImageClick,
 }) => {
-  const primarySrc = imageSrc || './image1.jpg.jpeg';
+  const primarySrc = imageSrc || getAssetUrl('image1.jpg.jpeg');
 
   return (
     <section id="main-menu-section" className="w-full px-3 pt-8 pb-3 sm:px-6 sm:pt-10 flex flex-col items-center scroll-mt-16">

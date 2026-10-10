@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 /**
- * Resolves asset URLs taking Vite's base path (e.g. '/enreach-salon/') into account.
+ * Resolves asset URLs taking Vite's base path (e.g. '/enreach-salon-main/') into account.
  * Ensures images and assets load properly when deployed to GitHub Pages subpaths.
  */
 export function getAssetUrl(path: string): string {
@@ -15,12 +15,14 @@ export function getAssetUrl(path: string): string {
     return path;
   }
 
-  const base = import.meta.env?.BASE_URL || '/';
-  if (path.startsWith(base)) {
-    return path;
-  }
+  // Retrieve base URL injected by Vite (e.g. '/enreach-salon-main/')
+  const base = import.meta.env?.BASE_URL || '/enreach-salon-main/';
+  const cleanBase = base.endsWith('/') ? base : `${base}/`;
 
+  // Remove leading './' or '/'
   const cleanPath = path.replace(/^(\.\/|\/)/, '');
-  return base.endsWith('/') ? `${base}${cleanPath}` : `${base}/${cleanPath}`;
+
+  return `${cleanBase}${cleanPath}`;
 }
+
 

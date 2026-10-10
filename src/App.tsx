@@ -12,19 +12,20 @@ import { MenuGallery } from './components/MenuGallery';
 import { LightboxModal } from './components/LightboxModal';
 import { BookingForm } from './components/BookingForm';
 import { LocationAndFooter } from './components/LocationAndFooter';
+import { getAssetUrl } from './utils';
 
 const STORAGE_KEY = 'enreach_salon_custom_menu_images';
 
 const DEFAULT_IMAGES: string[] = [
-  './image1.jpg.jpeg',
-  './image2.jpg.jpeg',
-  './image3.jpg.jpeg',
-  './image4.jpg.jpeg',
-  './image5.jpg.jpeg',
-  './image6.jpg.jpeg',
-  './image7.jpg.jpeg',
-  './image8.jpg.jpeg',
-  './image9.jpg.jpeg',
+  getAssetUrl('image1.jpg.jpeg'),
+  getAssetUrl('image2.jpg.jpeg'),
+  getAssetUrl('image3.jpg.jpeg'),
+  getAssetUrl('image4.jpg.jpeg'),
+  getAssetUrl('image5.jpg.jpeg'),
+  getAssetUrl('image6.jpg.jpeg'),
+  getAssetUrl('image7.jpg.jpeg'),
+  getAssetUrl('image8.jpg.jpeg'),
+  getAssetUrl('image9.jpg.jpeg'),
 ];
 
 export default function App() {
@@ -142,7 +143,7 @@ export default function App() {
             - Clicking opens fullscreen Lightbox
           */}
           <MainMenu
-            imageSrc={images[0] || './image1.jpg.jpeg'}
+            imageSrc={images[0] || getAssetUrl('image1.jpg.jpeg')}
             onImageClick={() => handleOpenLightbox(0)}
           />
 

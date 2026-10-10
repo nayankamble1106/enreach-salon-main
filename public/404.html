@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enreach Unisex Salon</title>
+    <script>
+      // Single Page Application redirect for GitHub Pages
+      var path = window.location.pathname;
+      var repo = '/enreach-salon-main/';
+      if (!path.startsWith(repo)) {
+        window.location.replace(repo);
+      } else {
+        window.location.replace(repo + window.location.search + window.location.hash);
+      }
+    </script>
+  </head>
+  <body style="background:#0D0D0D;color:#FFFFFF;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
+    <p>Redirecting to Enreach Unisex Salon...</p>
+  </body>
+</html>

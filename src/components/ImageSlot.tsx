@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getAssetUrl } from '../utils';
 
 interface ImageSlotProps {
   slotNumber: number; // 1 to 9
@@ -15,24 +16,29 @@ export const ImageSlot: React.FC<ImageSlotProps> = ({
   onClick,
   isMainSlot = false,
 }) => {
-  // Use direct static string paths
-  const defaultPath = `./image${slotNumber}.jpg.jpeg`;
-  const [currentSrc, setCurrentSrc] = useState<string>(imageSrc || defaultPath);
+  // Candidate fallback paths in sequence to guarantee loading on GitHub Pages or local
+  const baseCandidates = [
+    imageSrc ? (imageSrc.startsWith('http') || imageSrc.startsWith('data:') ? imageSrc : getAssetUrl(imageSrc)) : '',
+    getAssetUrl(`image${slotNumber}.jpg.jpeg`),
+    `./image${slotNumber}.jpg.jpeg`,
+    getAssetUrl(`image${slotNumber}.jpg`),
+    `./image${slotNumber}.jpg`,
+  ].filter(Boolean) as string[];
+
+  const [candidateIndex, setCandidateIndex] = useState<number>(0);
   const [hasFailed, setHasFailed] = useState<boolean>(false);
 
   useEffect(() => {
-    setCurrentSrc(imageSrc || defaultPath);
+    setCandidateIndex(0);
     setHasFailed(false);
-  }, [imageSrc, defaultPath]);
+  }, [imageSrc, slotNumber]);
+
+  const currentSrc = baseCandidates[candidateIndex] || getAssetUrl(`image${slotNumber}.jpg.jpeg`);
 
   // Gracefully try standard fallbacks on error without breaking app execution
   const handleImageError = () => {
-    if (currentSrc === `./image${slotNumber}.jpg.jpeg`) {
-      setCurrentSrc(`/image${slotNumber}.jpg.jpeg`);
-    } else if (currentSrc === `/image${slotNumber}.jpg.jpeg`) {
-      setCurrentSrc(`./image${slotNumber}.jpg`);
-    } else if (currentSrc === `./image${slotNumber}.jpg`) {
-      setCurrentSrc(`/image${slotNumber}.jpg`);
+    if (candidateIndex < baseCandidates.length - 1) {
+      setCandidateIndex((prev) => prev + 1);
     } else {
       setHasFailed(true);
     }
