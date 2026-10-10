@@ -15,8 +15,8 @@ export function getAssetUrl(path: string): string {
     return path;
   }
 
-  // Retrieve base URL injected by Vite (e.g. '/enreach-salon-main/')
-  const base = import.meta.env?.BASE_URL || '/enreach-salon-main/';
+  // Retrieve base URL injected by Vite (defaults to '/')
+  const base = import.meta.env?.BASE_URL || '/';
   const cleanBase = base.endsWith('/') ? base : `${base}/`;
 
   // Remove leading './' or '/'

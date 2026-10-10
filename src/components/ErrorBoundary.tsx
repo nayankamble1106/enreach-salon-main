@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<Props, State> {
     } catch {
       // ignore storage access errors
     }
-    const base = import.meta.env?.BASE_URL || '/enreach-salon-main/';
+    const base = import.meta.env?.BASE_URL || '/';
     window.location.href = base;
   };
 

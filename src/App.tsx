@@ -43,6 +43,9 @@ export default function App() {
               !img.includes('undefined') &&
               !img.match(/image\d+\.jpg$/)
             ) {
+              if (img.includes('/enreach-salon-main/')) {
+                return img.replace('/enreach-salon-main/', '/');
+              }
               return img;
             }
             return DEFAULT_IMAGES[i];
