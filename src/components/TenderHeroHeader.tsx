@@ -9,22 +9,10 @@ export const TenderHeroHeader: React.FC<TenderHeroHeaderProps> = ({
   onExploreMenu,
 }) => {
   const metrics = [
-    {
-      value: '8+ YEARS',
-      label: 'Industry Experience',
-    },
-    {
-      value: '4 YEARS',
-      label: 'Main Salon Operational',
-    },
-    {
-      value: '2 YEARS',
-      label: 'Wani Branch Expansion',
-    },
-    {
-      value: '10,000+',
-      label: 'Satisfied Clients Served',
-    },
+    { value: '8+ YEARS', label: 'Industry Exp.' },
+    { value: '4 YEARS', label: 'Main Salon' },
+    { value: '2 YEARS', label: 'Wani Branch' },
+    { value: '10,000+', label: 'Happy Clients' },
   ];
 
   const handleScrollToMenu = () => {
@@ -41,58 +29,78 @@ export const TenderHeroHeader: React.FC<TenderHeroHeaderProps> = ({
   return (
     <section
       id="tender-proposal-hero"
-      aria-label="Enreach Executive Introduction & Key Metrics"
-      className="w-full min-h-[calc(100svh-64px)] min-h-[calc(100vh-64px)] bg-[#0F0F0F] text-white border-b border-zinc-800/80 flex flex-col justify-between items-center px-4 py-8 sm:py-12 md:py-14"
+      aria-label="Enreach Official Tender Presentation"
+      className="w-full min-h-[calc(100svh-64px)] min-h-[calc(100vh-64px)] bg-[#09090B] text-white border-b border-white/10 flex flex-col justify-between items-center px-4 py-8 sm:py-12 md:py-16 relative overflow-hidden"
     >
-      <div className="w-full max-w-4xl mx-auto flex-1 flex flex-col justify-center items-center text-center my-auto">
-        {/* 
-          1. SIMPLE INTRO PARAGRAPH (Top Position):
-          Larger, bolder, highly legible on mobile screens for maximum visibility.
-        */}
-        <div className="mb-8 sm:mb-10 md:mb-12 max-w-3xl px-2 sm:px-4">
-          <p className="text-base sm:text-xl md:text-2xl text-white font-medium sm:font-semibold leading-relaxed sm:leading-relaxed md:leading-relaxed text-balance">
-            Welcome to <span className="text-white font-bold">Enreach Unisex Salon</span>! I am <span className="text-white font-bold">Vishal Phulguje</span>, bringing over <span className="text-white font-extrabold">8+ years</span> of expertise in professional styling and beauty care. We operate 2 successful branches—our <span className="text-white font-bold">Main Salon</span> (running for 4 years) and <span className="text-white font-bold">Wani Branch</span> (running for 2 years)—having proudly served over <span className="text-white font-extrabold">10,000+ happy clients</span> with premium hygiene and styling standards.
-          </p>
-        </div>
+      {/* Subtle ambient lighting / vignette for Apple-grade finish */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-800/20 via-[#09090B] to-[#050505] pointer-events-none" />
 
-        {/* 
-          2. 4 KEY METRICS CARDS (Positioned Directly Below Paragraph):
-          Significantly enlarged numbers: "8+ YEARS", "4 YEARS", "2 YEARS", and "10,000+".
-          Compact 2x2 grid on mobile view (and 4 columns on desktop/tablet).
-        */}
-        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
-          {metrics.map((metric, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-7 sm:px-4 rounded-xl bg-zinc-900/70 border border-zinc-800/90 shadow-lg backdrop-blur-sm transition-all hover:border-zinc-700 hover:bg-zinc-900/90"
-            >
-              <div className="text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-black font-mono tabular-nums tracking-tight text-white leading-none mb-2">
-                {metric.value}
+      <div className="w-full max-w-3xl mx-auto flex-1 flex flex-col justify-center items-center my-auto relative z-10">
+        {/* SINGLE EXECUTIVE PRESENTATION CARD (Ultra-Sleek) */}
+        <div className="w-full rounded-2xl bg-[#121214]/90 border border-white/15 p-6 sm:p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-xl flex flex-col items-center text-center">
+          
+          {/* Founder Tag */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-zinc-400 uppercase">
+              OFFICIAL TENDER PRESENTATION • FOUNDER VISHAL FULBHOGE
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight uppercase text-white mb-4">
+            Enreach Unisex Salon
+          </h1>
+
+          {/* Brief 2-line statement */}
+          <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-xl mb-8">
+            Delivering 8+ years of master styling excellence, operating 2 flagship branches, and serving 10,000+ satisfied clients.
+          </p>
+
+          {/* COMPACT INTEGRATED 2x2 STATS GRID (Inside Card) */}
+          <div className="w-full grid grid-cols-2 gap-3 sm:gap-4 pt-6 border-t border-white/10 mb-6">
+            {metrics.map((metric, index) => (
+              <div
+                key={index}
+                className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center transition-colors hover:border-white/25"
+              >
+                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-1 font-mono">
+                  {metric.value}
+                </div>
+                <div className="text-[11px] sm:text-xs font-medium text-zinc-400 uppercase tracking-widest">
+                  {metric.label}
+                </div>
               </div>
-              <div className="text-xs sm:text-sm font-semibold text-zinc-300 uppercase tracking-wider leading-snug">
-                {metric.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Call to Action Button */}
+          <button
+            type="button"
+            onClick={handleScrollToMenu}
+            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-semibold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg flex items-center justify-center gap-2 cursor-pointer group"
+          >
+            <span>View Digital Menu</span>
+            <i className="fa-solid fa-arrow-down text-xs text-black group-hover:translate-y-0.5 transition-transform" />
+          </button>
         </div>
       </div>
 
-      {/* 
-        Scroll cue for seamless user journey to the digital menu posters
-      */}
-      <div className="pt-6 sm:pt-8 flex flex-col items-center">
+      {/* Subtle bottom scroll cue */}
+      <div className="pt-4 sm:pt-6 flex flex-col items-center relative z-10">
         <button
           type="button"
           onClick={handleScrollToMenu}
-          className="group flex flex-col items-center gap-1.5 text-zinc-400 hover:text-white transition-colors cursor-pointer select-none"
-          aria-label="Scroll down for Hair Services & Tariff Card"
+          className="group flex flex-col items-center gap-1 text-zinc-400 hover:text-white transition-colors cursor-pointer select-none"
+          aria-label="Digital Tariff Card Below"
         >
-          <span className="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-zinc-400 group-hover:text-zinc-200">
-            Scroll down for Hair Services &amp; Tariff Card
+          <span className="text-[11px] sm:text-xs font-semibold tracking-widest uppercase text-zinc-400 group-hover:text-white">
+            DIGITAL TARIFF CARD BELOW ↓
           </span>
-          <i className="fa-solid fa-chevron-down text-xs text-zinc-400 group-hover:text-white animate-bounce" />
         </button>
       </div>
     </section>
   );
 };
+
+
+
