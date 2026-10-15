@@ -14,9 +14,17 @@ import { BookingForm } from './components/BookingForm';
 import { LocationAndFooter } from './components/LocationAndFooter';
 import { getAssetUrl } from './utils';
 
-const STORAGE_KEY = 'enreach_salon_custom_menu_images';
-
-const DEFAULT_IMAGES: string[] = [
+// Official Salon Service Category Menu Image Mapping (Cards 1 to 9)
+// 1. image1.jpg.jpeg -> Slot 1: Primary Hair Services & Salon Tariff Card (Main Front Menu)
+// 2. image2.jpg.jpeg -> Slot 2: Hair Cutting & Precision Styling
+// 3. image3.jpg.jpeg -> Slot 3: Luxury Hair Spa & Detox Therapy
+// 4. image4.jpg.jpeg -> Slot 4: Hair Color, Highlights & Balayage
+// 5. image5.jpg.jpeg -> Slot 5: Skin Rituals & Hydra Facials
+// 6. image6.jpg.jpeg -> Slot 6: Beard Sculpting & Men's Spa
+// 7. image7.jpg.jpeg -> Slot 7: Hands & Feet Care / Nails
+// 8. image8.jpg.jpeg -> Slot 8: Detan, Waxing & Body Glow
+// 9. image9.jpg.jpeg -> Slot 9: Bridal & Occasion Packages
+export const DEFAULT_IMAGES: string[] = [
   getAssetUrl('image1.jpg.jpeg'),
   getAssetUrl('image2.jpg.jpeg'),
   getAssetUrl('image3.jpg.jpeg'),
@@ -29,34 +37,8 @@ const DEFAULT_IMAGES: string[] = [
 ];
 
 export default function App() {
-  // Preserves any existing custom or default menu images mapped to exact filenames
-  const [images] = useState<string[]>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length === 9) {
-          return parsed.map((img, i) => {
-            if (
-              typeof img === 'string' &&
-              img.trim().length > 0 &&
-              !img.includes('undefined') &&
-              !img.match(/image\d+\.jpg$/)
-            ) {
-              if (img.includes('/enreach-salon-main/')) {
-                return img.replace('/enreach-salon-main/', '/');
-              }
-              return img;
-            }
-            return DEFAULT_IMAGES[i];
-          });
-        }
-      }
-    } catch {
-      // ignore parsing error
-    }
-    return DEFAULT_IMAGES;
-  });
+  // Maps and displays official menu images directly with no stale cache
+  const images = DEFAULT_IMAGES;
 
   // Gallery hidden by default as requested
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);

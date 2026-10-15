@@ -16,13 +16,12 @@ export const ImageSlot: React.FC<ImageSlotProps> = ({
   onClick,
   isMainSlot = false,
 }) => {
-  // Candidate fallback paths in sequence to guarantee loading on GitHub Pages or local
+  // Candidate paths in sequence to guarantee crisp loading
   const baseCandidates = [
     imageSrc ? (imageSrc.startsWith('http') || imageSrc.startsWith('data:') ? imageSrc : getAssetUrl(imageSrc)) : '',
     getAssetUrl(`image${slotNumber}.jpg.jpeg`),
     `./image${slotNumber}.jpg.jpeg`,
-    getAssetUrl(`image${slotNumber}.jpg`),
-    `./image${slotNumber}.jpg`,
+    `/image${slotNumber}.jpg.jpeg`,
   ].filter(Boolean) as string[];
 
   const [candidateIndex, setCandidateIndex] = useState<number>(0);

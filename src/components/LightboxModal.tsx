@@ -39,8 +39,7 @@ export const LightboxModal: React.FC<LightboxModalProps> = ({
       rawPassed ? (rawPassed.startsWith('http') || rawPassed.startsWith('data:') ? rawPassed : getAssetUrl(rawPassed)) : '',
       getAssetUrl(`image${currentSlotNumber}.jpg.jpeg`),
       `./image${currentSlotNumber}.jpg.jpeg`,
-      getAssetUrl(`image${currentSlotNumber}.jpg`),
-      `./image${currentSlotNumber}.jpg`,
+      `/image${currentSlotNumber}.jpg.jpeg`,
     ].filter(Boolean) as string[];
   }, [currentIndex, currentSlotNumber, images]);
 
